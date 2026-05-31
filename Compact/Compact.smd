@@ -1,0 +1,207 @@
+Name = Compact
+VERSION = 1
+
+RefreshRate = 30
+User_MainBarColor = COLOR{0xFFFF}
+;;User_MainBarColor_Name = Main bar color
+;;User_MainBarColor_Name_PL-PL = Główny kolor słupków
+User_MainLineColor = COLOR{0xFFFF}
+;;User_MainLineColor_Name = Graph's main line color
+;;User_MainLineColor_Name_PL-PL = Kolor głównej linii grafu
+User_BorderColor = COLOR{0xF77F}
+;;User_BorderColor_Name = Borders color
+;;User_BorderColor_Name_PL-PL = Kolor obwódek
+User_CategoryColor = COLOR{0xCCCF}
+;;User_CategoryColor_Name = Data type color
+;;User_CategoryColor_Name_PL-PL = Kolor kategorii danych
+User_RoundedLineColor = COLOR{0xF0FF}
+;;User_RoundedLineColor_Description = Color of line if rounded FPS value is equal to half of refresh rate.
+;;User_RoundedLineColor_Description_PL-PL = Kolor linii grafu, gdy zaokrąglona wartość FPS równa się połowy wartości odświeżania ekranu.
+;;User_RoundedLineColor_Name = Half display refresh rate color
+;;User_RoundedLineColor_Name_PL-PL = Kolor połowy odświeżania ekranu
+User_PerfectLineColor = COLOR{0x0C0F}
+;;User_PerfectLineColor_Description = Color of line if rounded FPS value is equal to refresh rate.
+;;User_PerfectLineColor_Description_PL-PL = Kolor linii grafu, gdy zaokrąglona wartość FPS równa się wartości odświeżaniu ekranu.
+;;User_PerfectLineColor_Name = Full display refresh rate color
+;;User_PerfectLineColor_Name_PL-PL = Kolor pełnego odświeżania ekranu
+User_BoxColor = COLOR{0x1117}
+;;User_BoxColor_Name = Background color
+;;User_BoxColor_Name_PL-PL = Kolor tła
+User_FpsCounterColor = COLOR{0x444D}
+;;User_FpsCounterColor_Description = It's behind graph when game runs.
+;;User_FpsCounterColor_Description_PL-PL = Wyświetla się za grafem gdy gra jest uruchomiona.
+;;User_FpsCounterColor_Name = FPS Counter color
+;;User_FpsCounterColor_Name_PL-PL = Kolor licznika FPS
+User_ShowResolution = true
+;;User_ShowResolution_Description = Shows two most likely candidates for rendering resolution of currently running game. Shows up only when SaltyNX is detected running.
+;;User_ShowResolution_Description_PL-PL = Pokaż dwóch najlepszych kandydatów na rodzielczość renderowania gry. Dostępne tylko gdy SaltyNX działa w tle.
+;;User_ShowResolution_Name = Show resolutions
+;;User_ShowResolution_Name_PL-PL = Pokaż rozdzielczości
+User_ShowReadSpeed = true
+;;User_ShowReadSpeed_Description = Shows game's read speed in MiB/s. Shows up only when SaltyNX is detected running.
+;;User_ShowReadSpeed_Description_PL-PL = Pokaż prędkość odczytu gry w MiB/s. Dostępne tylko gdy SaltyNX działa w tle.
+;;User_ShowReadSpeed_Name = Show game's read speed
+;;User_ShowReadSpeed_Name_PL-PL = Pokaż prędkość odczytu
+User_ShowFPSGraph = true
+;;User_ShowFPSGraph_Description = Shows FPS graph when game runs. Shows up only when SaltyNX is detected running.
+;;User_ShowFPSGraph_Description_PL-PL = Pokaż graf FPS gdy gra jest uruchomiona. Dostępne tylko gdy SaltyNX działa w tle.
+;;User_ShowFPSGraph_Name = Show FPS Graph
+;;User_ShowFPSGraphName_PL-PL = Pokaż graf FPS
+User_RamCpuLoadColor = COLOR{0xFFFF}
+;;User_RamCpuLoadColor_Name = Bar represting CPU part of RAM load
+;;User_RamCpuLoadColor_Name_PL-PL = Słupek reprezentujący obiążenie RAM przez CPU 
+User_RamGpuLoadColor = COLOR{0xF00F}
+;;User_RamGpuLoadColor_Name = Bar represting GPU part of RAM load
+;;User_RamGpuLoadColor_Name_PL-PL = Słupek reprezentujący obiążenie RAM przez GPU
+User_FpsGraphLegendColor = COLOR{0xFFFF}
+;;User_FpsGraphLegendColor_Name = Graph's legend
+;;User_FpsGraphLegendColor_Name_PL-PL = Legenda grafu
+User_MainTextColor = COLOR{0xFFFF}
+;;User_MainTextColor_Name = Remaining texts
+;;User_MainTextColor_Name_PL-PL = Reszta tekstów
+
+BackgroundColor = COLOR{0x0000}
+COMMON_MARGIN = 0
+HeaderText = false
+FooterText = false
+Movable = true
+UseCustomExitCombo = true
+EnableControls = false
+ClampToLayerBottom = true
+ClampToLayerRight = true
+
+EnableCPU = true
+EnableGPU = true
+EnableRAM = true
+EnableBoard = true
+EnableGame = true
+
+FPSreading = HISTORY{float, 176}
+GraphConditions: GRAPH_CONDITIONS{{round(x) == System_DisplayRefreshRate_int, User_PerfectLineColor, 0x0000}, {round(x * 2) == System_DisplayRefreshRate_int, User_RoundedLineColor, 0x0000}}
+GraphWidth = 176
+GraphHeight = 40
+
+TemperatureText: {" \uE00C %2.1f°C %2.1f°C %d.%d°C", Board_SocTemperatureCelsius_float, Board_PcbTemperatureCelsius_float, Board_SkinTemperatureMiliCelsius_int / 1000, (Board_SkinTemperatureMiliCelsius_int / 100) % 10}
+BatteryChargingText: {"%s", {Board_BatteryTimeEstimateInMinutes_int >= 0 ? {"%d:%02d", Board_BatteryTimeEstimateInMinutes_int / 60, Board_BatteryTimeEstimateInMinutes_int % 60} : "-:--"}}
+CPURealFreqText: {"%u.%u", CPU_RealHz_int / 1000000, (CPU_RealHz_int / 100000) % 10}
+GPURealFreqText: {"%u.%u", GPU_RealHz_int / 1000000, (GPU_RealHz_int / 100000) % 10}
+RAMRealFreqText: {"%u.%u", RAM_RealHz_int / 1000000, (RAM_RealHz_int / 100000) % 10}
+RAMusageText: {"%.0f", RAM_UsedAllMB_float}
+PowerConsumptionText: {"%+.02f", Board_PowerConsumption_float};
+lastFrame: 0
+FPSmax: {"%d", System_DisplayRefreshRate_int}
+FpsText: {"%u", Game_FPS_int}
+ReadSpeedText: {"\uE08E %.2f MiB/s", Game_ReadSpeedPerSecond_float / 1048576}
+ReadSpeedUnkText = "\uE08E \uE142"
+gameWasActive: false
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Start:
+VAR{AddHeight, 0}
+#if $EnableGame and $Game_IsGameRunning
+    VAR{gameWasActive, true}
+    #if $User_ShowResolution and $Game_ResolutionRenderCalls_int[0].calls != 0xFFFF
+        VAR{AddHeight, 12}
+    #endif
+    #if $User_ShowReadSpeed
+        VAR{AddHeight, AddHeight + 12}
+    #endif    
+    #if User_ShowFPSGraph
+        VAR{AddHeight, AddHeight + 5 + GraphHeight}
+    #endif
+#elif $gameWasActive
+	HISTORY_CLEAN{FPSreading}
+	VAR{gameWasActive, false}
+	VAR{lastFrame, 0}
+#endif
+BOX{0, 0, 180, 95 + AddHeight, User_BoxColor}
+TEXT{20, 12, 12, 0xFFFF, true, CPURealFreqText}
+TEXT{83, 12, 12, 0xFFFF, true, RAMRealFreqText}
+TEXT{136, 44, 12, 0xFFFF, true, GPURealFreqText}
+TEXT{0, 28, 12, User_CategoryColor, true, "#0"}
+TEXT{0, 44, 12, User_CategoryColor, true, "#1"}
+TEXT{0, 60, 12, User_CategoryColor, true, "#2"}
+TEXT{0, 76, 12, User_CategoryColor, true, "#3"}
+TEXT{0, 92, 12, User_MainTextColor, true, TemperatureText}
+TEXT{74, 28, 12, User_CategoryColor, true, "R"}
+TEXT{73, 44, 12, User_CategoryColor, true, "G"}
+TEXT{74, 60, 12, User_CategoryColor, true, "F"}
+TEXT{74, 76, 12, User_CategoryColor, true, "B"}
+EMPTY_BOX{20, 16, 51, 13, User_BorderColor}
+EMPTY_BOX{20, 32, 51, 13, User_BorderColor}
+EMPTY_BOX{20, 48, 51, 13, User_BorderColor}
+EMPTY_BOX{20, 64, 51, 13, User_BorderColor}
+BOX{22, 18, CPU_Core0Load_double / 2, 10, User_MainBarColor}
+BOX{22, 34, CPU_Core1Load_double / 2, 10, User_MainBarColor}
+BOX{22, 50, CPU_Core2Load_double / 2, 10, User_MainBarColor}
+BOX{22, 66, CPU_Core3Load_double / 2, 10, User_MainBarColor}
+EMPTY_BOX{83, 16, 51, 13, User_BorderColor}
+EMPTY_BOX{83, 32, 51, 13, User_BorderColor}
+EMPTY_BOX{83, 48, 51, 13, User_BorderColor}
+EMPTY_BOX{83, 64, 51, 13, User_BorderColor}
+VAR{RAM_LoadGPU_int, (RAM_LoadAll_int - RAM_LoadCPU_int) / 10}
+BOX{85, 18, RAM_LoadCPU_int / 20, 10, User_RamCpuLoadColor}
+BOX{85+(RAM_LoadCPU_int/20), 18, RAM_LoadGPU_int / 2, 10, User_RamGpuLoadColor}
+BOX{85, 34, GPU_Load_int / 20, 10, User_MainBarColor}
+BOX{85, 50, Board_FanRotationPercentageLevel_float / 2, 10, User_MainBarColor}
+BOX{85, 66, Board_BatteryChargePercentage_float / 2, 10, User_MainBarColor}
+TEXT{136, 76, 12, User_MainTextColor, true, BatteryChargingText}
+TEXT{136, 60, 12, User_MainTextColor, true, PowerConsumptionText}
+TEXT{136, 28, 12, User_MainTextColor, true, RAMusageText}
+#if $EnableGame and $Game_IsGameRunning
+    VAR{OffsetY, 105}
+    #if $User_ShowResolution
+        #if $Game_ResolutionRenderCalls_int[0].calls != 0xFFFF
+            #if $Game_ResolutionRenderCalls_int[0].calls > $Game_ResolutionViewportCalls_int[0].calls
+                VAR{resolutionOutput0, Game_ResolutionRenderCalls_int[0]}
+                #if $Game_ResolutionRenderCalls_int[1].calls > $Game_ResolutionViewportCalls_int[0].calls
+                    VAR{resolutionOutput1, Game_ResolutionRenderCalls_int[1]}
+                #else
+                    VAR{resolutionOutput1, Game_ResolutionViewportCalls_int[1]}
+                #endif
+            #else
+                VAR{resolutionOutput0, Game_ResolutionViewportCalls_int[0]}
+                #if $Game_ResolutionViewportCalls_int[1].calls < $Game_ResolutionRenderCalls_int[0].calls
+                    VAR{resolutionOutput1, Game_ResolutionRenderCalls_int[1]}
+                #else
+                    VAR{resolutionOutput1, Game_ResolutionViewportCalls_int[1]}
+                #endif
+            #endif
+            VAR{ResolutionsText, {"\uE134 %dx%d", resolutionOutput0.width, resolutionOutput0.height}}
+            VAR{ResolutionsBackText, {"\uE134 %dx%d", resolutionOutput1.width, resolutionOutput1.height}}
+            VAR{ResolutionsTwoText, {"\uE134 %dx%d ? %dx%d", resolutionOutput0.width, resolutionOutput0.height, resolutionOutput1.width, resolutionOutput1.height}}
+            #if $resolutionOutput0.width == 0 or $resolutionOutput1.width == 0
+                #if $resolutionOutput0.width > 0
+                    TEXT{2, OffsetY, 12, User_MainTextColor, true, ResolutionsText}
+                #else
+                    TEXT{2, OffsetY, 12, User_MainTextColor, true, ResolutionsBackText}
+                #endif
+                VAR{OffsetY, OffsetY + 12}
+            #endif
+            #if $resolutionOutput0.width > 0 and $resolutionOutput1.width > 0
+                TEXT{2, OffsetY, 12, User_MainTextColor, true, ResolutionsTwoText}
+                VAR{OffsetY, OffsetY + 12}
+            #endif
+        #endif
+    #endif
+    #if $User_ShowReadSpeed
+        #if $Game_ReadSpeedPerSecond_float
+            TEXT{3, OffsetY, 12, User_MainTextColor, true, ReadSpeedText}
+        #else
+            TEXT{3, OffsetY, 12, User_MainTextColor, true, ReadSpeedUnkText}
+        #endif
+        VAR{OffsetY, OffsetY + 12}
+    #endif
+    #if $User_ShowFPSGraph
+        #if $Game_LastFrameNumber_int > $lastFrame
+            HISTORY_UPDATE{FPSreading, Game_FpsAvg_float}
+            VAR{lastFrame, Game_LastFrameNumber_int}
+        #endif
+        EMPTY_BOX{0, OffsetY-9, GraphWidth + 2, GraphHeight  + 2, User_BorderColor}
+        TEXT{2, OffsetY+1, 10, User_FpsGraphLegendColor, true, FPSmax}
+        TEXT{2, (OffsetY+1)+GraphHeight-10, 10, User_FpsGraphLegendColor, true, "0"}
+        GET_DIMENSIONS{dimensions, GraphHeight, true, FpsText}
+        TEXT{(GraphWidth - dimensions.x) / 2, (OffsetY-9)+GraphHeight, GraphHeight, User_FpsCounterColor, true, FpsText}
+        GRAPH_LINE_CHART{0, OffsetY-8, GraphWidth, GraphHeight, 0, System_DisplayRefreshRate_int, RIGHT_TO_LEFT, User_MainLineColor, 0x0000, GraphConditions, FPSreading}
+    #endif
+#endif
