@@ -202,6 +202,6 @@ TEXT{136, 28, 12, User_MainTextColor, true, RAMusageText}
         TEXT{2, (OffsetY+1)+GraphHeight-10, 10, User_FpsGraphLegendColor, true, "0"}
         GET_DIMENSIONS{dimensions, GraphHeight, true, FpsText}
         TEXT{(GraphWidth - dimensions.x) / 2, (OffsetY-9)+GraphHeight, GraphHeight, User_FpsCounterColor, true, FpsText}
-        GRAPH_LINE_CHART{0, OffsetY-8, GraphWidth, GraphHeight, 0, System_DisplayRefreshRate_int, RIGHT_TO_LEFT, User_MainLineColor, 0x0000, GraphConditions, FPSreading}
+        GRAPH_LINE_CHART{1, OffsetY-8, GraphWidth, GraphHeight, 0, System_DisplayRefreshRate_int, RIGHT_TO_LEFT, User_MainLineColor, 0x0000, GraphConditions, FPSreading}
     #endif
 #endif
